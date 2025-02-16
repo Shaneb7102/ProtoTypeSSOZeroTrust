@@ -15,9 +15,11 @@ public class SecurityConfig {
                 .requestMatchers("/api/user").authenticated()
                 .anyRequest().permitAll()
             )
-            .oauth2ResourceServer(oauth2 -> oauth2.jwt()); // Enforce JWT authentication
+            .oauth2Login(); // Enable OAuth2 login for user authentication
+
+        http
+            .oauth2ResourceServer(oauth2 -> oauth2.jwt()); // Enforce JWT authentication for API access
 
         return http.build();
     }
 }
-
